@@ -84,7 +84,7 @@
         %
         \begin{itemize}
             \item nice expressiveness-tractability trade-off
-            \item basis for Prolog, Datalogc and Logic Programming
+            \item basis for Prolog, Datalog and Logic Programming
             \item very well established
             %
             \begin{itemize}
@@ -637,7 +637,6 @@
         \end{itemize}
     \end{block}
     %
-    %
     \begin{block}{Formal definition (pt. 2)}
         Given a Horn clause $\phi \Leftarrow \psi_1 \wedge \ldots \wedge \psi_n$, it is
         %
@@ -647,18 +646,60 @@
             \begin{itemize}
                 \item[ie] when the head is a contradiction (a.k.a no head)
                 \item then the clause is written as `$\Leftarrow \psi_1 \wedge \ldots \wedge \psi_n$'
-            \end{itemize} 
+            \end{itemize}
 
             \item a \alert{fact} if $n = 1$ and $\psi_1 = \top$
             %
             \begin{itemize}
                 \item[ie] when the head is a tautology (a.k.a no body)
                 \item then the clause is written as `$\phi$'
-            \end{itemize} 
+            \end{itemize}
 
-            \item a \alert{rule} otherwise 
+            \item a \alert{rule} otherwise
         \end{itemize}
     \end{block}
+\end{frame}
+
+\begin{frame}{Examples -- Peano numbers}
+    \begin{exampleblock}{Defining $\predication{nat}/1$ and $\predication{succ}/2$ via Horn clauses}
+        \begin{itemize}
+            \item TBD
+        \end{itemize}
+    \end{exampleblock}
+\end{frame}
+
+\begin{frame}{Examples -- Lists}
+    \begin{exampleblock}{Defining $\predication{list}/1$ and $\predication{head}/2$ via Horn clauses}
+        \begin{itemize}
+            \item TBD
+        \end{itemize}
+    \end{exampleblock}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Horn clauses vs. FOL formul\ae}
+    \begin{block}{Horn clauses are \textbf{particular cases} of FOL formul\ae, where}
+        \begin{itemize}
+            \item all variables in the head are \alert{universally} quantified
+            \item all variables occurring in the in the body (but not in the head) are \alert{existentially} quantified
+            \item where negation of predicates is forbidden
+            \item where all logic connectives are forbidden
+            %
+            \begin{itemize}
+                \item except conjunction and implication
+                \item implication can only occur once
+                \item conjunction can only occur among the pre-conditions of the implication
+            \end{itemize}
+        \end{itemize}
+    \end{block}
+
+    \begin{exampleblock}{How to read Horn clauses}
+        \centering
+        $\predication{mother(\variable{X}) \Leftarrow \predication{parent}(\variable{X}, \variable{Y}) \wedge \predication{female}(\variable{X})}$
+
+        $\downarrow$ should be read as
+
+        $\predication{\alert{\forall \variable{X}} : mother(\variable{X}) \Leftarrow \alert{\exists \variable{Y}} : \predication{parent}(\variable{X}, \variable{Y}) \wedge \predication{female}(\variable{X})}$
+    \end{exampleblock}
 \end{frame}
 
 %===============================================================================
