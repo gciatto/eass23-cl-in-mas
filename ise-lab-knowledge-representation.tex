@@ -194,7 +194,7 @@
 
 \begin{frame}{Overview}
     \begin{itemize}
-        \item Three main ingredients:
+        \item[$\rightarrow$] Three main ingredients:
         %
         \begin{description}\small
             \item[terms] --- for representing entities
@@ -458,7 +458,7 @@
         A \alert{statement} about $n\geq 0$ \alert{terms}, which may or may not hold true
     \end{block}
     %
-    \begin{alertblock}{Formal syntax\hfill\textbf{\footnotesize(notice the syntactic convention!)}}
+    \begin{alertblock}{Formal syntax\hfill\textbf{\footnotesize(notice the syntactic convention!)}}\label{slide:predicate}
         $$\begin{array}{rcl}
             \meta{Predicate} & := & \top \mid \bot \mid \meta{Predication} \mid \meta{Predication} \terminal{(} \meta{Arguments} \terminal{)}
             \\
@@ -660,19 +660,72 @@
     \end{block}
 \end{frame}
 
+\begin{frame}[allowframebreaks]{Logic Theories (a.k.a. Knowledge Bases)}
+    \begin{block}{Definition}
+        A \alert{set} of formul\ae{} which are known to be true \& \alert{consistent} with each others
+        %
+        \begin{description}
+            \item[set] $\rightarrow$ the order of formul\ae{} doesn't matter
+            \item[consistent] $\rightarrow$ (informal) no formula contradicts the others
+            %
+            \begin{itemize}
+                \item[ie] it is not possible to infer $\bot$ from the set of formul\ae{}
+                %
+                \begin{itemize}
+                    \item[!] deciding whether this is the case or not requires some \alert{inference} algorithm
+                \end{itemize}
+            \end{itemize}
+        \end{description}
+    \end{block}
+    %
+    \begin{block}{Syntax for theories of definite clauses}
+        \begin{center}
+            $\begin{array}{rcl}
+                \meta{Theory} & := & \meta{Definite~Clause} \mid \meta{Theory} \meta{Theory}
+                \\
+                \meta{Definite~Clause} & := & \meta{Rule} \mid \meta{Fact}
+                \\
+                \meta{Rule} & := & \meta{Head} \terminal{\Leftarrow} \meta{Body} \terminal{\fullstop}
+                \\
+                \meta{Fact} & := & \meta{Head} \terminal{\fullstop}
+                \\
+                \meta{Head} & := & \meta{Predicate}
+                \\
+                \meta{Body} & := & \meta{Predicate} \mid \meta{Body} \terminal{\wedge} \meta{Body}
+                \\
+                \meta{Predicate} & := & \text{see slide \ref{slide:predicate}}
+            \end{array}$
+        \end{center}
+    \end{block}
+\end{frame}
+
 \begin{frame}{Examples -- Peano numbers}
-    \begin{exampleblock}{Defining $\predication{nat}/1$ and $\predication{succ}/2$ via Horn clauses}
-        \begin{itemize}
-            \item TBD
-        \end{itemize}
+    \begin{exampleblock}{Defining $\predication{nat}/1$ via a theory of definite clauses}
+        \begin{description}
+            \item[$\predication{nat}(\functor{z})\fullstop$] $\rightarrow$ $\functor{z}$ is a natural number
+            \item[$\predication{nat}(\functor{s}(\variable{X})) \Leftarrow \predication{nat}(\variable{X})\fullstop$] $\rightarrow$ for all $\variable{X}$, $\functor{s}(\variable{X})$ is a natural number if $\variable{X}$ is a natural number as well
+        \end{description}
+    \end{exampleblock}
+    %
+    \begin{exampleblock}{Defining $\predication{succ}/2$ via a theory of definite clauses}
+        \begin{description}
+            \item[$\predication{succ}(\functor{s}(\variable{X}), \variable{X}) \Leftarrow \predication{nat}(\variable{X}) \fullstop$] $\rightarrow$ for all $\variable{X}$, $\functor{s}(\variable{X})$ is the successor of $\variable{X}$ if $\variable{X}$ is a natural number
+        \end{description}
     \end{exampleblock}
 \end{frame}
 
 \begin{frame}{Examples -- Lists}
-    \begin{exampleblock}{Defining $\predication{list}/1$ and $\predication{head}/2$ via Horn clauses}
-        \begin{itemize}
-            \item TBD
-        \end{itemize}
+    \begin{exampleblock}{Defining $\predication{list}/1$ via a theory of definite clauses}
+        \begin{description}
+            \item[$\predication{list}(\functor{nil})\fullstop$] $\rightarrow$ $\functor{nil}$ is a list
+            \item[$\predication{list}(\functor{cons}(\variable{H}, \variable{T})) \Leftarrow \predication{list}(\variable{T})\fullstop$] $\rightarrow$ for all $\variable{T}$ and regardless of $\variable{H}$, $\functor{cons}(\variable{H}, \variable{T})$ is a list if $\variable{T}$ is a list as well
+        \end{description}
+    \end{exampleblock}
+    %
+    \begin{exampleblock}{Defining $\predication{head}/2$ via a theory of definite clauses}
+        \begin{description}
+            \item[$\predication{head}(\variable{H}, \functor{cons}(\variable{H}, \variable{T})) \fullstop$] $\rightarrow$ for all $\variable{H}$ and regardless of $\variable{T}$, the head of $\functor{cons}(\variable{H}, \variable{T})$ is $\variable{H}$
+        \end{description}
     \end{exampleblock}
 \end{frame}
 
@@ -692,14 +745,187 @@
         \end{itemize}
     \end{block}
 
-    \begin{exampleblock}{How to read Horn clauses}
+    \begin{exampleblock}{How to read definite clauses}
         \centering
         $\predication{mother(\variable{X}) \Leftarrow \predication{parent}(\variable{X}, \variable{Y}) \wedge \predication{female}(\variable{X})}$
 
-        $\downarrow$ should be read as
+        \medskip
+
+        $\downarrow$ {\footnotesize should be read as}
+
+        \medskip
 
         $\predication{\alert{\forall \variable{X}} : mother(\variable{X}) \Leftarrow \alert{\exists \variable{Y}} : \predication{parent}(\variable{X}, \variable{Y}) \wedge \predication{female}(\variable{X})}$
+
+        \medskip
+
+        $\downarrow$ {\footnotesize i.e., in natural language}
+
+        \medskip
+
+        ``for all $\variable{X}$, $\variable{X}$ is a mother if there exists some $\variable{Y}$ of which $\variable{X}$ is parent, \\ and if $\variable{X}$ is female''
     \end{exampleblock}
+\end{frame}
+
+\begin{frame}
+    \todo[inline]{Exercise writing the $sum/3$ relation for summing up Peano numbers}
+
+    \todo[inline]{Exercise writing the $concat/3$ relation for concatenating two lists}
+
+    \todo[inline]{Exercise model students, courses, exams, and marks, then identify the set of functors, and the set of predications, and the Herbrand universe}
+\end{frame}
+
+%===============================================================================
+\section{Flexibility of Logic Representation}
+%===============================================================================
+
+\begin{frame}{Overview}
+    \begin{itemize}
+        \item Three main ingredients:
+        %
+        \begin{description}\small
+            \item[terms] --- for representing entities
+            \item[predicates] --- for representing statements about entities
+            \item[clauses] --- for representing properties of entities or relations among them
+        \end{description}
+
+        \vfill
+
+        \item[$\rightarrow$] Many ways of representing knowledge through them:
+        %
+        \begin{description}\small
+            \item[extensional vs. intensional] $\approx$ explicitly vs. implicitly
+            \item[propositional vs. relational] $\approx$ in tabular form vs. as a graph
+        \end{description}
+
+        \vfill
+
+        \item One powerful tool:
+        %
+        \begin{description}\small
+            \item[resolution] --- allowing for \alert{intensional} representations, programming, reasoning, \ldots
+        \end{description}
+
+        \vfill
+
+        \item Two fundamental mechanisms for manipulating knowledge:
+        %
+        \begin{description}\small
+            \item[substitution application] $\approx$ rewriting a formula by assigning variables
+            \item[most general unifier] $\approx$ computing the substitution making 2 formul\ae{} equal
+        \end{description}
+    \end{itemize}
+\end{frame}
+
+\subsection{Intensional vs. Extensional}
+
+\begin{frame}[allowframebreaks]{Intensional vs. Extensional Representations}
+    \begin{block}{``Intension and extension'' \uuurl{https://www.britannica.com/topic/intension}}\itshape\small
+        In logic, correlative words that indicate the reference of a term or concept:
+        %
+        \begin{description}
+            \item[``intension''] indicates the internal content of a term or concept that constitutes its formal definition;
+            \item[``extension''] indicates its range of applicability by naming the particular objects that it denotes.
+        \end{description}
+        %
+        For instance:
+        %
+        \begin{itemize}
+            \item the intension of ``ship'' as a substantive is ``vehicle for conveyance on water,''
+            \item its extension embraces such things as cargo ships, passenger ships, battleships, and sailing ships.
+        \end{itemize}
+    \end{block}
+
+    \framebreak
+
+    \begin{block}{In practice}\small
+        \begin{description}
+            \item[intensional] representations of concepts $\approx$ describing the \alert{invariants} all instances must comply to
+            %
+            \begin{itemize}
+                \item support both \alert{generating} (resp. \alert{testing}) instances from (resp. against) definitions
+                \item \alert{concise} as information is \alert{implicit}, but \alert{computation} is required
+            \end{itemize}
+
+            \item[extensional] representations of concepts $\approx$ describing \alert{actual} instances and their peculiarities
+            %
+            \begin{itemize}
+                \item this is what we do when we ``fill'' data sets/bases with data
+                \item information is \alert{explicitly} represented, hence \alert{space} is required
+            \end{itemize}
+        \end{description}
+    \end{block}
+
+    \begin{block}{In computational logic}
+        \begin{description}
+            \item[variables] make it possible to \alert{express} \emph{intensional} representations
+            \item[inference] makes it possible to \alert{exploit} \emph{intensional} representations
+        \end{description}
+    \end{block}
+
+    \begin{alertblock}{Benefits of intensional representations}
+        \begin{itemize}
+            \item compactness of representations
+            \item possibility to express/treat concepts with \alert{infinitely many} instances
+            %
+            \begin{itemize}
+                \item[eg] Peano numbers: 2 clauses, infinitely many natural numbers!
+            \end{itemize}
+        \end{itemize}
+    \end{alertblock}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Example -- Abraham's Family Tree}
+    \begin{figure}
+        \centering
+        \caption{Abraham's family tree \uuurl{https://en.wikipedia.org/wiki/Abraham\%27s_family_tree}}
+        \includegraphics[width=.4\linewidth]{figures/family-tree.pdf}
+    \end{figure}
+
+    \framebreak
+
+    \begin{block}{\textbf{Extensional} representation of \textbf{parenthood} (via ground facts)}
+        \begin{itemize}
+            \item $\predication{parent}(\functor{abraham}, \functor{isaac})\fullstop$
+            \item $\predication{parent}(\functor{sarah}, \functor{isaac})\fullstop$
+            \item $\predication{parent}(\functor{isaac}, \functor{jacob})\fullstop$
+            \item $\predication{parent}(\functor{beutel}, \functor{rebecca})\fullstop$
+            \item $\predication{parent}(\functor{rebecca}, \functor{jacob})\fullstop$
+            \item[$\vdots$]
+        \end{itemize}
+    \end{block}
+
+    \framebreak
+
+    \begin{block}{\textbf{Intensional} representation of \textbf{grand-parenthood} (via rules)}
+        \begin{itemize}
+            \item $\predication{grand\text{-}parent}(\variable{X}, \variable{Y}) \Leftarrow \predication{parent}(\variable{X}, \variable{Z}) \wedge \predication{parent}(\variable{Z}, \variable{Y}) \fullstop$
+        \end{itemize}
+    \end{block}
+
+    \begin{alertblock}{Important remarks}
+        \begin{itemize}
+            \item Thanks to \alert{variables}, one may reference unknown entities in clauses
+            \item One may need \alert{inference} to actually know who's the grandparent of a given person
+            %
+            \begin{itemize}
+                \item inference $\rightarrow$ computation
+            \end{itemize}
+            \item Alternatively, one my \alert{extensively} represent grandparenthood instances
+        \end{itemize}
+    \end{alertblock}
+\end{frame}
+
+\begin{frame}
+    \todo[inline]{Exercise expressing the grandparenthood relation extensively}
+\end{frame}
+
+\subsection{Relational vs. Propositional}
+
+\begin{frame}[allowframebreaks]{Relational vs. Propositional Representations}
+    \begin{block}{Relational representations}
+        contenuto...
+    \end{block}
 \end{frame}
 
 %===============================================================================
