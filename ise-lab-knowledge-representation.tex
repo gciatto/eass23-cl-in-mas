@@ -14,7 +14,7 @@
 % version
 \newcommand{\versionmajor}{0}
 \newcommand{\versionminor}{1}
-\newcommand{\versionpatch}{4-dev}
+\newcommand{\versionpatch}{5-dev}
 \newcommand{\version}{\versionmajor.\versionminor.\versionpatch}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \title[\currentLab{} -- Knowledge Representation]{Knowledge Representation with Horn Clauses}
@@ -441,12 +441,6 @@
     \end{block}
 \end{frame}
 
-\begin{frame}
-    \todo[inline]{Exercise on term construction in \twopkt{}}
-
-    \todo[inline]{Exercise on the construction of the first $N$ of the Herbrand universe for a given set of functors}
-\end{frame}
-
 \subsection{Predicates}
 
 \begin{frame}[allowframebreaks]{Predicates}
@@ -747,7 +741,7 @@
 
     \begin{exampleblock}{How to read definite clauses}
         \centering
-        $\predication{mother(\variable{X}) \Leftarrow \predication{parent}(\variable{X}, \variable{Y}) \wedge \predication{female}(\variable{X})}$
+        $\predication{mother}(\variable{X}) \Leftarrow \predication{parent}(\variable{X}, \variable{Y}) \wedge \predication{female}(\variable{X})$
 
         \medskip
 
@@ -755,7 +749,7 @@
 
         \medskip
 
-        $\predication{\alert{\forall \variable{X}} : mother(\variable{X}) \Leftarrow \alert{\exists \variable{Y}} : \predication{parent}(\variable{X}, \variable{Y}) \wedge \predication{female}(\variable{X})}$
+        $\alert{\forall \variable{X}} : \predication{mother}(\variable{X}) \Leftarrow \alert{\exists \variable{Y}} : \predication{parent}(\variable{X}, \variable{Y}) \wedge \predication{female}(\variable{X})$
 
         \medskip
 
@@ -765,14 +759,6 @@
 
         ``for all $\variable{X}$, $\variable{X}$ is a mother if there exists some $\variable{Y}$ of which $\variable{X}$ is parent, \\ and if $\variable{X}$ is female''
     \end{exampleblock}
-\end{frame}
-
-\begin{frame}
-    \todo[inline]{Exercise writing the $sum/3$ relation for summing up Peano numbers}
-
-    \todo[inline]{Exercise writing the $concat/3$ relation for concatenating two lists}
-
-    \todo[inline]{Exercise model students, courses, exams, and marks, then identify the set of functors, and the set of predications, and the Herbrand universe}
 \end{frame}
 
 %===============================================================================
@@ -916,16 +902,341 @@
     \end{alertblock}
 \end{frame}
 
+\subsection{Relational vs. Propositional}
+
+\begin{frame}[allowframebreaks]{Relational vs. Propositional Representations}
+
+    \begin{block}{Propositional representations}
+        The natural way of representing knowledge in \alert{data science}:
+        %
+        \begin{itemize}
+            \item data is represented in \alert{tabular form}
+            %
+            \begin{itemize}
+                \item \alert{attribute--value}, bi-dimensional representation
+                \item $m$ columns, one per attribute
+                \item $n$ rows, one per instance
+            \end{itemize}
+
+            \item this can be attained $n$ definite clauses, one per instance
+            %
+            \begin{itemize}
+                \item each one having a head of arity $m$
+                \item where the $i^{th}$ argument of the head of the $j^{th}$ denotes the value of the $i^{th}$ attribute for the $j^{th}$ instance
+            \end{itemize}
+        \end{itemize}
+    \end{block}
+
+    \begin{exampleblock}{Iris Dataset, in \textbf{propositional} form\cccite{uci:iris}}
+        \begin{itemize}
+            \item $\predication{iris}(\functor{flower1}, 5.1, 3.5, 1.4, 0.2, \functor{setosa}) \fullstop$
+            \item[$\vdots$]
+            \item $\predication{iris}(\functor{flower82}, 5.5, 2.4, 3.7, 1.0, \functor{versicolor}) \fullstop$
+            \item[$\vdots$]
+            \item $\predication{iris}(\functor{flower150}, 5.9, 3.0, 5.1, 1.8,  \functor{virginica}) \fullstop$
+        \end{itemize}
+    \end{exampleblock}
+    %
+    \begin{itemize}
+        \item Attributes names:
+        %
+        \begin{itemize}
+            \item[1.] identifier, \alert{2.} sepal length, \alert{3.} sepal width, \alert{4.} petal length,
+            \item[5.] petal width, \alert{6.} class
+        \end{itemize}
+    \end{itemize}
+
+    \begin{block}{Relational representations}
+        The natural way of representing knowledge in computational logic:
+        %
+        \begin{itemize}
+            \item constants represent individual entities or values
+            \item structures represent groups of composed entities
+            \item clauses represent sets of, or relations among, those entities
+        \end{itemize}
+    \end{block}
+
+    \begin{exampleblock}{Iris Dataset, in \textbf{relational} form\cccite{uci:iris}}
+        \begin{multicols}{2}
+            \begin{itemize}
+                \item $\predication{iris}(\functor{flower1}) \fullstop$
+                \item $\predication{sepal-length}(\functor{flower1}, 5.1) \fullstop$
+                \item $\predication{sepal-width}(\functor{flower1}, 3.5) \fullstop$
+                \item $\predication{petal-length}(\functor{flower1}, 1.4) \fullstop$
+                \item $\predication{petal-width}(\functor{flower1}, 0.2) \fullstop$
+                \item $\predication{class}(\functor{flower1}, \functor{setosa}) \fullstop$
+                \item[$\vdots$]
+                \item $\predication{iris}(\functor{flower82}) \fullstop$
+                \item $\predication{sepal-length}(\functor{flower82}, 5.5) \fullstop$
+                \item $\predication{sepal-width}(\functor{flower82}, 2.4) \fullstop$
+                \item $\predication{petal-length}(\functor{flower82}, 3.7) \fullstop$
+                \item $\predication{petal-width}(\functor{flower82}, 1.0) \fullstop$
+                \item $\predication{class}(\functor{flower82}, \functor{versicolor}) \fullstop$
+                \item[$\vdots$]
+            \end{itemize}
+        \end{multicols}
+    \end{exampleblock}
+\end{frame}
+
+\begin{frame}{Pros and cons}
+    \begin{columns}
+        \begin{column}{.48\linewidth}
+            \begin{block}{Propositional}
+                \begin{itemize}
+                    \item[$\checkmark$] Table $\rightarrow$ matrix
+                    %
+                    \begin{itemize}
+                        \item[$\rightarrow$] good for sub-symbolic processing
+                    \end{itemize}
+                    \item[$\checkmark$] Easy to count/add instances
+                    \item[$\checkmark$] Easy to count attributes
+                    \item[$\times$] Hard to add/remove attributes
+                    \item[$\times$] Rigid schema
+                \end{itemize}
+            \end{block}
+        \end{column}
+        %
+        \begin{column}{.48\linewidth}
+            \begin{block}{Relational}
+                \begin{itemize}
+                    \item[$\checkmark$] Supports $n$-ary relations s.t. $n\geq2$
+                    \item[$\checkmark$] Good for symbolic processing
+                    \item[$\checkmark$] Easy to count/add instances
+                    \item[$\checkmark$] Easy to add/remove attributes
+                    \item[$\checkmark$] Flexible schema
+                    \item[$\times$] Hard to count attributes
+                \end{itemize}
+            \end{block}
+        \end{column}
+    \end{columns}
+    %
+    \begin{center}
+        \alert{easy} $\rightarrow$ O(1)
+        \\
+        \alert{hard} $\rightarrow$ O(n)
+    \end{center}
+\end{frame}
+
+\begin{frame}{Relationalisation and Propositionalization\ccite{Lachiche2010}}
+    \begin{block}{Relationalisation}
+        \begin{itemize}
+            \item the operation of converting a propositional theory into a relational one
+            \item it is always possible
+        \end{itemize}
+    \end{block}
+
+    \begin{block}{Propositionalisation}
+        \begin{itemize}
+            \item the operation of converting a relational theory into a propositional one
+            \item may be tricky if the relational theory has $n$-ary relations s.t. $n\geq3$
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+%===============================================================================
+\section{About Horn Clauses in Prolog}
+%===============================================================================
+
+\begin{frame}{Prolog Overview}
+    \begin{itemize}
+        \item Most relevant language in the \alert{logic programming} playground
+
+        \vfill
+
+        \item The \alert{program} is a \alert{theory} of Horn clauses
+        %
+        \begin{itemize}
+            \item exploiting a compact notation (`\pl{:-}' instead of `$\Leftarrow$', `\pl{,}' instead of `$\wedge$')
+        \end{itemize}
+
+        \vfill
+
+        \item Execution consists of applying SLD+NaF to prove \alert{goals} against that theory
+        %
+        \begin{itemize}
+            \item goals are user-provided, a.k.a. \alert{queries}
+            \item all solutions are \alert{lazily} enumerated via \alert{backtracking}
+            \item solutions consists of variables' \alert{assignments}
+        \end{itemize}
+
+        \vfill
+
+        \item Several built-in predicates are commonly available for practical reasons
+        %
+        \begin{itemize}
+            \item Prolog is an actual programming language
+            \item quite more than a simple theorem prover
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\subsection{Why Prolog is tricky}
+
+\begin{frame}[allowframebreaks]{Horn Clauses in Prolog}
+    \begin{block}{The Prolog trick}
+        \begin{itemize}
+            \item the \alert{exact same syntax} is used for both predicates and structures
+            \item making them interchangeable
+            \item hence supporting the definition of \alert{meta-predicates}
+            %
+            \begin{itemize}
+                \item[ie] predicates accepting other predicates as arguments
+            \end{itemize}
+        \end{itemize}
+    \end{block}
+
+    \prologimport{listings/meta-predicates.pl}
+
+    \begin{block}{Consequences of the Prolog trick}
+        \begin{itemize}
+            \item conjunctions are represented as structures whose functor is $\pl{,}/2$
+            %
+            \begin{center}
+                \begin{tabular}{rcl}
+                    \pl{(a, b)} & \qquad $\equiv$ \qquad & \pl{,(a, b)}
+                    \\
+                    \pl{(a, b, c)} & \qquad $\equiv$ \qquad & \pl{,(a, ,(b, c))}
+                    \\
+                    \pl{(a, b, c, d)} & \qquad $\equiv$ \qquad & \pl{,(a, ,(b, ,(c, d)))}
+                \end{tabular}
+            \end{center}
+
+            \item clauses are represented as structures whose functor is $\pl{:-}/2$
+            %
+            \begin{center}
+                \begin{tabular}{rcll}
+                    \pl{a.} & \qquad $\equiv$ \qquad & \pl{:-(a, true)} & fact
+                    \\
+                    \pl{a :- b.} & \qquad $\equiv$ \qquad & \pl{:-(a, b)} & rule
+                    \\
+                    \pl{a :- b, c.} & \qquad $\equiv$ \qquad & \pl{:-(a, ,(b, c))} & rule
+                    \\
+                    \pl{:- a, b, c.} & \qquad $\equiv$ \qquad & \pl{:-(,(a ,(b, c)))} & goal
+                \end{tabular}
+            \end{center}
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+%===============================================================================
+\section{Practice}
+%===============================================================================
+
+\subsection{\tuprolog{} and \twopkt{}}
+
+\begin{frame}{\twopkt{} Overview}
+    \begin{itemize}
+        \item Multi-platform, Kotlin-based reboot of \tuprolog{}
+        %
+        \begin{center}
+            \alert{\url{https://github.com/tuProlog/2p-kt}}
+            \\
+            \small(please star us on GitHub :)
+        \end{center}
+
+        \vfill
+
+        \item Multi-module architecture: each aspect of LP has its own module
+        %
+        \begin{itemize}
+            \item[eg] module \texttt{:core} supports \alert{terms and Horn clauses}
+            \item[eg] module \texttt{:parser-core} supports \alert{parsing} terms and Horn clauses
+            \item[eg] module \texttt{:theory} supports \alert{theories} of Horn clauses
+        \end{itemize}
+
+        \vfill
+
+        \item Far more than yet another Prolog interpreter
+        %
+        \begin{itemize}
+            \item it's an \alert{ecosystem} for logic programming and symbolic AI in general
+            \item LP functionalities are made available as re-usable \& extensible \alert{libraries}
+            \item a Prolog interpreter is available, but not only\ccite{dcc-aixia-2021-plp}
+        \end{itemize}
+
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{The \kt{it.unibo.tuprolog.core} package in \kt{:core}}
+    \begin{figure}
+        \centering
+        \includegraphics[width=.7\linewidth]{figures/term-hierarchy.pdf}
+        \caption{Term's type hierarchy in \twopkt{}}
+        \label{fig:term-hierarchy}
+    \end{figure}
+
+    \framebreak
+
+    \begin{itemize}
+        \item Set of interrelated interfaces for knowledge representation in \twopkt{}
+
+        \bigskip
+
+        \item \kt{Term} is the super-type of all terms and \alert{clauses} (Prolog trick)
+        %
+        \begin{description}
+            \item[\kt{Var}] --- type for logic variables
+            \item[\kt{Number}] --- type for numeric constants
+            \item[\kt{Atom}] --- type for alphanumeric constants (strings)
+            \item[\kt{Struct}] --- type for structures
+            \item[\kt{List}] --- type for lists
+            \item[\kt{Tuple}] --- type for conjunctions
+            \item[\kt{Clause}] --- type for clauses
+        \end{description}
+
+        \framebreak
+
+        \item All sub-types of \kt{Term}:
+        %
+        \begin{itemize}
+            \item are strictly \alert{immutable} (i.e. one cannot alter a term/clause)
+            \item come with a number of \alert{static factory} methods letting the user instantiate them
+            %
+            \begin{itemize}
+                \item most commonly \kt{<Type>.\alert{of}(<args>)}
+                \item they won't let you instantiate invalid terms or clauses :)
+                \item they guarantee the term to be of the \alert{most adequate} sub-type
+            \end{itemize}
+        \end{itemize}
+
+        \bigskip
+
+        \item In the following exercises you will mostly need to create terms
+        %
+        \begin{itemize}
+            \item use the map on figure \ref{fig:term-hierarchy} to know \alert{which} types exist
+            \item have a look to \cite{Ciatto20212pktPresentation} for detailed API description
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\subsection{Exercises on terms}
+
+\begin{frame}
+    \todo[inline]{Exercise on term construction in \twopkt{}}
+
+    \todo[inline]{Exercise on the construction of the first $N$ of the Herbrand universe for a given set of functors}
+\end{frame}
+
+\subsection{Exercises on Horn clauses}
+
+\begin{frame}
+    \todo[inline]{Exercise writing the $sum/3$ relation for summing up Peano numbers}
+
+    \todo[inline]{Exercise writing the $concat/3$ relation for concatenating two lists}
+
+    \todo[inline]{Exercise model students, courses, exams, and marks, then identify the set of functors, and the set of predications, and the Herbrand universe}
+\end{frame}
+
+\subsection{Exercises on representations}
+
 \begin{frame}
     \todo[inline]{Exercise expressing the grandparenthood relation extensively}
 \end{frame}
 
-\subsection{Relational vs. Propositional}
-
-\begin{frame}[allowframebreaks]{Relational vs. Propositional Representations}
-    \begin{block}{Relational representations}
-        contenuto...
-    \end{block}
+\begin{frame}
+    \todo[inline]{Exercise Propositionalize the theory concerning Abraham's family tree}
+    \todo[inline]{Exercise write tabular dataset in logic propositional form, then convert it in relational form}
 \end{frame}
 
 %===============================================================================

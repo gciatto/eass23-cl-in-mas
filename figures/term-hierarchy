@@ -1,0 +1,63 @@
+@startuml
+skinparam shadowing false
+
+interface Term
+interface Constant
+interface Var
+interface Struct
+interface Numeric
+interface Integer
+interface Real
+interface Atom
+interface Truth
+interface Indicator
+interface Recursive
+interface Empty
+interface EmptyBlock
+interface EmptyList
+interface List
+interface Cons
+interface Block
+interface Tuple
+
+Term <|-down- Struct
+Term <|-down- Constant
+Term <|-down- Var
+
+Constant <|-down- Numeric
+Constant <|-down- Atom
+
+Numeric <|-down- Real
+Numeric <|-down- Integer
+
+Struct <|-down- Atom
+Struct <|-down- Recursive
+Struct <|-down- Indicator
+
+Recursive <|-down- List
+Recursive <|-down- Tuple
+Recursive <|-down- Block
+
+Atom <|-down- Truth
+Atom <|-down- Empty
+
+Empty <|-up- EmptyList
+Empty <|-up- EmptyBlock
+
+List <|-down- EmptyList
+List <|-down- Cons
+Block <|-down- EmptyBlock
+
+package clauses <<Rectangle>> {
+
+    interface Clause
+    interface Rule
+    interface Directive
+    interface Fact
+    Struct <|-down- Clause
+    Clause <|-down- Rule
+    Clause <|-down- Directive
+    Rule <|-down- Fact
+
+}
+@enduml
