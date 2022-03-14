@@ -12,9 +12,9 @@
 \usepackage{ise-lab-common}
 \usepackage{ise-lab-knowledge-representation}
 % version
-\newcommand{\versionmajor}{0}
-\newcommand{\versionminor}{1}
-\newcommand{\versionpatch}{5-dev}
+\newcommand{\versionmajor}{1}
+\newcommand{\versionminor}{0}
+\newcommand{\versionpatch}{0}
 \newcommand{\version}{\versionmajor.\versionminor.\versionpatch}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \title[\currentLab{} -- Knowledge Representation]{Knowledge Representation with Horn Clauses}
@@ -54,8 +54,8 @@
         \begin{itemize}
             \item logic terms (constants, functions, variables)
             \item logic clauses (facts, rules, goals)
-            \item unifiers and substitutions
-            \item unification and MGU
+            % \item unifiers and substitutions
+            % \item unification and MGU
         \end{itemize}
 
         \vfill
@@ -124,7 +124,7 @@
 
         \bigskip
 
-        \item In 1965, Robinson proposes the \alert{SL resolution principle}
+        \item In 1965, Robinson proposes the \alert{SL resolution principle}\ccite{Robinson1965}
         %
         \begin{itemize}
             \item[ie] an algorithm for decising the \alert{unsatisfiability} of FOL formul\ae{} in \alert{Skolemized form}
@@ -139,7 +139,7 @@
 
         \framebreak
 
-        \item In 1974, Kowalski proposes the SL\alert{D} resolution procedure
+        \item In 1974, Kowalski proposes the SL\alert{D} resolution procedure\ccite{KowVan1970}
         %
         \begin{itemize}
             \item SL\alert{D} = Selective Linear [for] \alert{Definite} [clauses]
@@ -160,14 +160,14 @@
             \item essentially reifying the SLD procedure into a programming language
             %
             \begin{itemize}
-                \item cf. ``Fifty Years of Prolog and Beyond'' for the full history
+                \item cf. \cite{Korner2022} for the full history
             \end{itemize}
             \item that impacted virtually any subsequent logic/symbolic AI technology
         \end{itemize}
 
         \framebreak
 
-        \item In 1978, Clark proposes extends SLD with \alert{negation as failure} (NaF)
+        \item In 1978, Clark proposes extends SLD with \alert{negation as failure}\ccite{Clark1978} (NaF)
         %
         \begin{itemize}
             \item adding well-founded negation support
@@ -175,7 +175,7 @@
 
         \bigskip
 
-        \item In 1982, Martelli and Montanari propose an efficient algorithm for unification
+        \item In 1982, Martelli and Montanari propose an efficient algorithm for unification\ccite{MartelliM82}
         %
         \begin{itemize}
             \item paving the way towards many sorts of automated reasoning algorithms / software
@@ -1211,6 +1211,15 @@
 \end{frame}
 
 \subsection{Exercises on terms}
+
+\begin{frame}{About Exercises}
+
+    \begin{block}{Repository}
+        \centering
+        \url{https://gitlab.com/pika-lab/courses/ise/ay2122/lab-1}
+    \end{block}
+    
+\end{frame}
 
 \startExercise{}
 
