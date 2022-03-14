@@ -385,7 +385,7 @@
         \end{itemize}
     \end{block}
 
-    \begin{alertblock}{Inductive definition}
+    \begin{alertblock}{Inductive definition}\label{slide:herbrand}
         Let $\mathcal{F}$ be the set of all $n$-ary functors s.t. $n \geq 0$ (including constants)
         %
         \begin{itemize}
@@ -1212,31 +1212,91 @@
 
 \subsection{Exercises on terms}
 
-\begin{frame}
-    \todo[inline]{Exercise on term construction in \twopkt{}}
+\startExercise{}
 
-    \todo[inline]{Exercise on the construction of the first $N$ of the Herbrand universe for a given set of functors}
+\begin{frame}{\currentExercise{} -- Terms construction}
+
+    \begin{block}{Goal}
+        Understand the basics of terms construction in \twopkt{}
+    \end{block}
+    
+\end{frame}
+
+\startExercise{}
+
+\begin{frame}{\currentExercise{} -- Herbrand Universe}
+    \begin{block}{Goal}
+        \begin{itemize}
+            \item Implement the algorithm for constructing the Herbrand Universe \ldots
+            %
+            \begin{itemize}
+                \item \ldots spawned by a set of functors and their arities (provided as arguments)
+            \end{itemize}
+
+            \item Use the algorithm from slide \ref{slide:herbrand} as a reference
+            
+            \item Since $\mathcal{H}_\infty$ may be of infinite cardinality\ldots
+            %
+            \begin{itemize}
+                \item \ldots you'll actually implement the algorithm for computing $\mathcal{H}_i$
+                %
+                \begin{itemize}
+                    \item where $i$ is provided as argument
+                \end{itemize}
+            \end{itemize}
+        \end{itemize}
+    \end{block}
 \end{frame}
 
 \subsection{Exercises on Horn clauses}
 
-\begin{frame}
-    \todo[inline]{Exercise writing the $sum/3$ relation for summing up Peano numbers}
+\startExercise{}
 
-    \todo[inline]{Exercise writing the $concat/3$ relation for concatenating two lists}
+\begin{frame}{\currentExercise{} -- Clauses construction}
 
-    \todo[inline]{Exercise model students, courses, exams, and marks, then identify the set of functors, and the set of predications, and the Herbrand universe}
+    \begin{block}{Goal}
+        Understand the basics of clauses and theories construction in \twopkt{}
+    \end{block}
+    
+\end{frame}
+
+\startExercise{}
+
+\begin{frame}{\currentExercise{} -- Theory Analysis}
+    \begin{block}{Goal}
+        \begin{itemize}
+            \item Write an algorithm aimed at inspecting a theory, in order to compute:
+            %
+            \begin{itemize}
+                \item the set $\mathcal{P}$ of predicate names (predications)
+                \item the set $\mathcal{F}$ of function names (functors)
+                \item the set $\mathcal{X}$ of variables names 
+            \end{itemize}
+            \item It should work \alert{for any given theory}
+        \end{itemize}
+    \end{block}
 \end{frame}
 
 \subsection{Exercises on representations}
 
-\begin{frame}
-    \todo[inline]{Exercise expressing the grandparenthood relation extensively}
-\end{frame}
+\startExercise{}
 
-\begin{frame}
-    \todo[inline]{Exercise Propositionalize the theory concerning Abraham's family tree}
-    \todo[inline]{Exercise write tabular dataset in logic propositional form, then convert it in relational form}
+\begin{frame}{\currentExercise{} -- Relationalization}
+    \begin{block}{Goal}
+        \begin{itemize}
+            \item Write an algorithm aimed at relationalising a theory in propositional form
+            
+            \item It should work \alert{for any given theory}
+            
+            \item The algorithm may accept as input:
+            %
+            \begin{itemize}
+                \item a theory, assumed in propositional form
+                \item the predication used to represent instances, in the propositional theory
+                \item the names of the attributes (which may be implicit in the propositional theory)
+            \end{itemize}
+        \end{itemize}
+    \end{block}
 \end{frame}
 
 %===============================================================================
@@ -1254,8 +1314,7 @@
 %%%%
 \setbeamertemplate{page number in head/foot}{}
 %/////////
-\begin{frame}[c,noframenumbering]{\refname}
-%\begin{frame}[t,allowframebreaks,noframenumbering]{\refname}
+\begin{frame}[t,allowframebreaks,noframenumbering]{\refname}
 %	\tiny
     \scriptsize
 %	\footnotesize
