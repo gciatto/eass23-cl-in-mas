@@ -14,7 +14,7 @@
 % version
 \newcommand{\versionmajor}{1}
 \newcommand{\versionminor}{0}
-\newcommand{\versionpatch}{0}
+\newcommand{\versionpatch}{1}
 \newcommand{\version}{\versionmajor.\versionminor.\versionpatch}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \title[\currentLab{} -- Knowledge Representation]{Knowledge Representation with Horn Clauses}
@@ -130,7 +130,8 @@
             \item[ie] an algorithm for decising the \alert{unsatisfiability} of FOL formul\ae{} in \alert{Skolemized form}
             %
             \begin{itemize}
-                \item Skolem form $\approx$ all variables are \alert{universally} quantified at the beginning of the formula
+                \item[ie] all variables are \alert{universally} quantified at the beginning of the formula
+                \item[cf] \uurl{https://mathworld.wolfram.com/SkolemizedForm.html} 
             \end{itemize}
 
             \item SL = Selective Linear
@@ -308,7 +309,7 @@
             \item $\variable{X}$ is a variable
             \item $\functor{s}(\variable{X})$, $\functor{s}(\functor{z})$, etc. are structures
             \item $\mathcal{F} = \{ \functor{s}, \functor{z} \}$ \hfill {\footnotesize(where $\functor{s}$ is a 1-ary functor, while $\functor{z}$ is 0-ary)}
-            \item $\mathcal{V} = \{ \functor{X} \}$
+            \item $\mathcal{V} = \{ \variable{X} \}$
         \end{itemize}
     \end{exampleblock}
 \end{frame}
@@ -761,6 +762,25 @@
     \end{exampleblock}
 \end{frame}
 
+\begin{frame}{Skip to Exercises} 
+    \begin{block}{You may already start some exercises}
+        \begin{enumerate}
+            \item exercise about terms on slide \ref{slide:first-exercise-on-terms}
+            \item exercise about Herbrand universe on slide \ref{slide:second-exercise-on-terms}
+            \item exercise about clauses on slide \ref{slide:first-exercise-on-clauses}
+            \item exercise about theories on slide \ref{slide:second-exercise-on-clauses}
+        \end{enumerate}
+    \end{block}
+
+    \begin{alertblock}{Prerequisites}
+        \begin{itemize}
+            \item consider reading slide \ref{slide:prolog} (relevant Prolog-related aspects)
+            \item consider reading slide \ref{slide:tuprolog-overview} (relevant \twopkt{}-related aspects)
+        \end{itemize}
+        before proceeding with exercises
+    \end{alertblock}
+\end{frame}
+
 %===============================================================================
 \section{Flexibility of Logic Representation}
 %===============================================================================
@@ -1038,6 +1058,7 @@
 %===============================================================================
 
 \begin{frame}{Prolog Overview}
+\label{slide:prolog}
     \begin{itemize}
         \item Most relevant language in the \alert{logic programming} playground
 
@@ -1125,6 +1146,7 @@
 \subsection{\tuprolog{} and \twopkt{}}
 
 \begin{frame}{\twopkt{} Overview}
+\label{slide:tuprolog-overview}
     \begin{itemize}
         \item Multi-platform, Kotlin-based reboot of \tuprolog{}
         %
@@ -1224,6 +1246,7 @@
 \startExercise{}
 
 \begin{frame}{\currentExercise{} -- Terms construction}
+    \label{slide:first-exercise-on-terms}
 
     \begin{block}{Goal}
         Understand the basics of terms construction in \twopkt{}
@@ -1234,6 +1257,8 @@
 \startExercise{}
 
 \begin{frame}{\currentExercise{} -- Herbrand Universe}
+    \label{slide:second-exercise-on-terms}
+
     \begin{block}{Goal}
         \begin{itemize}
             \item Implement the algorithm for constructing the Herbrand Universe \ldots
@@ -1262,7 +1287,7 @@
 \startExercise{}
 
 \begin{frame}{\currentExercise{} -- Clauses construction}
-
+    \label{slide:first-exercise-on-clauses}
     \begin{block}{Goal}
         Understand the basics of clauses and theories construction in \twopkt{}
     \end{block}
@@ -1272,6 +1297,7 @@
 \startExercise{}
 
 \begin{frame}{\currentExercise{} -- Theory Analysis}
+    \label{slide:second-exercise-on-clauses}
     \begin{block}{Goal}
         \begin{itemize}
             \item Write an algorithm aimed at inspecting a theory, in order to compute:
