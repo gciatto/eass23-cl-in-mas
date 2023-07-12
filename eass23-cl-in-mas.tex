@@ -140,7 +140,9 @@
 %/////////
 
 %/////////
-\begin{frame}[c,allowframebreaks]{Fundamental Mechanisms of Intelligent Systems}
+\begin{frame}[
+    c %,allowframebreaks
+]{Fundamental Mechanisms of Intelligent Systems}
 %
 \begin{enumerate}
     \item Knowledge representation
@@ -187,25 +189,25 @@
     %
 \end{enumerate}
 %
-\framebreak
-%
-\begin{block}{Special guest: \textbf{Explanation}}
-    How knowledge is \alert{transferred} from an agent to another
-    %
-    \begin{itemize}
-        \item software to human agent $\leftarrow$ symbolic knowledge \alert{extraction}
-        \item human to software agent $\leftarrow$ symbolic knowledge \alert{injection}
-    \end{itemize}
-\end{block}
-%
-\begin{block}{Special guest: \textbf{Argumentation}}
-    Letting agents reach shared agreements by \alert{arguing}
-    %
-    \begin{itemize}
-        \item reason about how arguments attack each other
-        \item reason about when to present an argument to the opponent(s)
-    \end{itemize}
-\end{block}
+% \framebreak
+% %
+% \begin{block}{Special guest: \textbf{Explanation}}
+%     How knowledge is \alert{transferred} from an agent to another
+%     %
+%     \begin{itemize}
+%         \item software to human agent $\leftarrow$ symbolic knowledge \alert{extraction}
+%         \item human to software agent $\leftarrow$ symbolic knowledge \alert{injection}
+%     \end{itemize}
+% \end{block}
+% %
+% \begin{block}{Special guest: \textbf{Argumentation}}
+%     Letting agents reach shared agreements by \alert{arguing}
+%     %
+%     \begin{itemize}
+%         \item reason about how arguments attack each other
+%         \item reason about when to present an argument to the opponent(s)
+%     \end{itemize}
+% \end{block}
 %
 \end{frame}
 %/////////
@@ -476,7 +478,8 @@ Topics necessary to understand two or more mechanisms:
         \end{description}
     \end{block}
     %
-    \begin{alertblock}{Formal syntax\hfill\textbf{\footnotesize(notice the syntactic convention!)}}\label{slide:terms}
+    \begin{alertblock}{Formal syntax\hfill\textbf{\footnotesize(notice the syntactic convention!)}}
+        \label{slide:terms}
         \begin{center}
             $\begin{array}{rcl}
                 \meta{Term} & := & \meta{Variable} \mid \meta{Structure} \mid \meta{Constant}
@@ -503,6 +506,7 @@ Topics necessary to understand two or more mechanisms:
     \end{alertblock}
 
     \begin{block}{Syntactical convention}
+        \label{slide:convention}
         \begin{itemize}
             \item $\variable{Variables}$ $\rightarrow$ capitalised italics
             \item $\functor{Functor}$ $\rightarrow$ lowercase monospaced
@@ -1454,7 +1458,7 @@ Topics necessary to understand two or more mechanisms:
         A (possibly \emph{empty}) set of \alert{variable--term} pairs
     \end{block}
     %
-    \begin{alertblock}{Formal syntax\hfill\textbf{\footnotesize(same syntactic notation as in \cite{lectures:ise-kr})}}
+    \begin{alertblock}{Formal syntax\hfill\textbf{\footnotesize(same syntactic notation as in slide \ref{slide:convention})}}
         \begin{center}
             $\begin{array}{rcl}
                 \meta{Substitution} & := & \terminal{\varnothing} \mid \terminal{\{} \meta{Assignemnts} \terminal{\}}
@@ -1463,9 +1467,9 @@ Topics necessary to understand two or more mechanisms:
                 \\
                 \meta{Assignment} & := & \meta{Variable} \terminal{\mapsto} \meta{Term}
                 \\
-                \meta{Term} & := & \text{see lecture \cite{lectures:ise-kr}}
+                \meta{Term} & := & \text{see slide \ref{slide:terms}}
                 \\
-                \meta{Variable} & := & \text{see lecture \cite{lectures:ise-kr}}
+                \meta{Variable} & := & \text{see slide \ref{slide:terms}}
             \end{array}$
         \end{center}
     \end{alertblock}
