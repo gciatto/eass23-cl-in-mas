@@ -5,7 +5,7 @@ on:
       - main
       - master
 env:
-  LATEX_ROOT: ise-lab-knowledge-representation
+  LATEX_ROOT: eass23-cl-in-mas
 jobs:
   compile:
     runs-on: ubuntu-latest
