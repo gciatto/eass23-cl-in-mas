@@ -1367,204 +1367,7 @@ Topics necessary to understand two or more mechanisms:
     \end{block}
 \end{frame}
 
-%===============================================================================
-\subsection{Practice}
-%===============================================================================
-
-\subsection{\tuprolog{} and \twopkt{}}
-
-\begin{frame}{\twopkt{} Overview}
-\label{slide:tuprolog-overview}
-    \begin{itemize}
-        \item Multi-platform, Kotlin-based reboot of \tuprolog{}
-        %
-        \begin{center}
-            \alert{\url{https://github.com/tuProlog/2p-kt}}
-            \\
-            \small(please star us on GitHub :)
-        \end{center}
-
-        \vfill
-
-        \item Multi-module architecture: each aspect of LP has its own module
-        %
-        \begin{itemize}
-            \item[eg] module \texttt{:core} supports \alert{terms and Horn clauses}
-            \item[eg] module \texttt{:parser-core} supports \alert{parsing} terms and Horn clauses
-            \item[eg] module \texttt{:theory} supports \alert{theories} of Horn clauses
-        \end{itemize}
-
-        \vfill
-
-        \item Far more than yet another Prolog interpreter
-        %
-        \begin{itemize}
-            \item it's an \alert{ecosystem} for logic programming and symbolic AI in general
-            \item LP functionalities are made available as re-usable \& extensible \alert{libraries}
-            \item a Prolog interpreter is available, but not only\ccite{dcc-aixia-2021-plp}
-        \end{itemize}
-
-    \end{itemize}
-\end{frame}
-
-\begin{frame}[allowframebreaks]{The \kt{it.unibo.tuprolog.core} package in \kt{:core}}
-    \begin{figure}
-        \centering
-        \includegraphics[width=.7\linewidth]{figures/term-hierarchy.pdf}
-        \caption{Term's type hierarchy in \twopkt{}}
-        \label{fig:term-hierarchy}
-    \end{figure}
-
-    \framebreak
-
-    \begin{itemize}
-        \item Set of interrelated interfaces for knowledge representation in \twopkt{}
-
-        \bigskip
-
-        \item \kt{Term} is the super-type of all terms and \alert{clauses} (Prolog trick)
-        %
-        \begin{description}
-            \item[\kt{Var}] --- type for logic variables
-            \item[\kt{Number}] --- type for numeric constants
-            \item[\kt{Atom}] --- type for alphanumeric constants (strings)
-            \item[\kt{Struct}] --- type for structures
-            \item[\kt{List}] --- type for lists
-            \item[\kt{Tuple}] --- type for conjunctions
-            \item[\kt{Clause}] --- type for clauses
-        \end{description}
-
-        \framebreak
-
-        \item All sub-types of \kt{Term}:
-        %
-        \begin{itemize}
-            \item are strictly \alert{immutable} (i.e. one cannot alter a term/clause)
-            \item come with a number of \alert{static factory} methods letting the user instantiate them
-            %
-            \begin{itemize}
-                \item most commonly \kt{<Type>.\alert{of}(<args>)}
-                \item they won't let you instantiate invalid terms or clauses :)
-                \item they guarantee the term to be of the \alert{most adequate} sub-type
-            \end{itemize}
-        \end{itemize}
-
-        \bigskip
-
-        \item In the following exercises you will mostly need to create terms
-        %
-        \begin{itemize}
-            \item use the map on figure \ref{fig:term-hierarchy} to know \alert{which} types exist
-            \item have a look to \cite{Ciatto20212pktPresentation} for detailed API description
-        \end{itemize}
-    \end{itemize}
-\end{frame}
-
-\subsubsection{Exercises on terms}
-
-\begin{frame}{About Exercises}
-
-    \begin{block}{Repository}
-        \centering
-        \url{https://gitlab.com/pika-lab/courses/ise/ay2122/lab-1}
-    \end{block}
-    
-\end{frame}
-
-\startExercise{}
-
-\begin{frame}{\currentExercise{} -- Terms construction}
-    \label{slide:first-exercise-on-terms}
-
-    \begin{block}{Goal}
-        Understand the basics of terms construction in \twopkt{}
-    \end{block}
-    
-\end{frame}
-
-\startExercise{}
-
-\begin{frame}{\currentExercise{} -- Herbrand Universe}
-    \label{slide:second-exercise-on-terms}
-
-    \begin{block}{Goal}
-        \begin{itemize}
-            \item Implement the algorithm for constructing the Herbrand Universe \ldots
-            %
-            \begin{itemize}
-                \item \ldots spawned by a set of functors and their arities (provided as arguments)
-            \end{itemize}
-
-            \item Use the algorithm from slide \ref{slide:herbrand} as a reference
-            
-            \item Since $\mathcal{H}_\infty$ may be of infinite cardinality\ldots
-            %
-            \begin{itemize}
-                \item \ldots you'll actually implement the algorithm for computing $\mathcal{H}_i$
-                %
-                \begin{itemize}
-                    \item where $i$ is provided as argument
-                \end{itemize}
-            \end{itemize}
-        \end{itemize}
-    \end{block}
-\end{frame}
-
-\subsubsection{Exercises on Horn clauses}
-
-\startExercise{}
-
-\begin{frame}{\currentExercise{} -- Clauses construction}
-    \label{slide:first-exercise-on-clauses}
-    \begin{block}{Goal}
-        Understand the basics of clauses and theories construction in \twopkt{}
-    \end{block}
-    
-\end{frame}
-
-\startExercise{}
-
-\begin{frame}{\currentExercise{} -- Theory Analysis}
-    \label{slide:second-exercise-on-clauses}
-    \begin{block}{Goal}
-        \begin{itemize}
-            \item Write an algorithm aimed at inspecting a theory, in order to compute:
-            %
-            \begin{itemize}
-                \item the set $\mathcal{P}$ of predicate names (predications)
-                \item the set $\mathcal{F}$ of function names (functors)
-                \item the set $\mathcal{X}$ of variables names 
-            \end{itemize}
-            \item It should work \alert{for any given theory}
-        \end{itemize}
-    \end{block}
-\end{frame}
-
-\subsubsection{Exercises on representations}
-
-\startExercise{}
-
-\begin{frame}{\currentExercise{} -- Relationalization}
-    \begin{block}{Goal}
-        \begin{itemize}
-            \item Write an algorithm aimed at relationalising a theory in propositional form
-            
-            \item It should work \alert{for any given theory}
-            
-            \item The algorithm may accept as input:
-            %
-            \begin{itemize}
-                \item a theory, assumed in propositional form
-                \item the predication used to represent instances, in the propositional theory
-                \item the names of the attributes (which may be implicit in the propositional theory)
-            \end{itemize}
-        \end{itemize}
-    \end{block}
-\end{frame}
-
-%===============================================================================
 \section{Inference}
-%===============================================================================
 
 %===============================================================================
 \subsection{Premises}
@@ -2453,8 +2256,203 @@ Topics necessary to understand two or more mechanisms:
 \end{frame}
 
 %===============================================================================
-\subsection{Exercises}
+\section{Practice}
 %===============================================================================
+
+\subsection{\tuprolog{} and \twopkt{}}
+
+\begin{frame}{\twopkt{} Overview}
+\label{slide:tuprolog-overview}
+    \begin{itemize}
+        \item Multi-platform, Kotlin-based reboot of \tuprolog{}
+        %
+        \begin{center}
+            \alert{\url{https://github.com/tuProlog/2p-kt}}
+            \\
+            \small(please star us on GitHub :)
+        \end{center}
+
+        \vfill
+
+        \item Multi-module architecture: each aspect of LP has its own module
+        %
+        \begin{itemize}
+            \item[eg] module \texttt{:core} supports \alert{terms and Horn clauses}
+            \item[eg] module \texttt{:parser-core} supports \alert{parsing} terms and Horn clauses
+            \item[eg] module \texttt{:theory} supports \alert{theories} of Horn clauses
+        \end{itemize}
+
+        \vfill
+
+        \item Far more than yet another Prolog interpreter
+        %
+        \begin{itemize}
+            \item it's an \alert{ecosystem} for logic programming and symbolic AI in general
+            \item LP functionalities are made available as re-usable \& extensible \alert{libraries}
+            \item a Prolog interpreter is available, but not only\ccite{dcc-aixia-2021-plp}
+        \end{itemize}
+
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{The \kt{it.unibo.tuprolog.core} package in \kt{:core}}
+    \begin{figure}
+        \centering
+        \includegraphics[width=.7\linewidth]{figures/term-hierarchy.pdf}
+        \caption{Term's type hierarchy in \twopkt{}}
+        \label{fig:term-hierarchy}
+    \end{figure}
+
+    \framebreak
+
+    \begin{itemize}
+        \item Set of interrelated interfaces for knowledge representation in \twopkt{}
+
+        \bigskip
+
+        \item \kt{Term} is the super-type of all terms and \alert{clauses} (Prolog trick)
+        %
+        \begin{description}
+            \item[\kt{Var}] --- type for logic variables
+            \item[\kt{Number}] --- type for numeric constants
+            \item[\kt{Atom}] --- type for alphanumeric constants (strings)
+            \item[\kt{Struct}] --- type for structures
+            \item[\kt{List}] --- type for lists
+            \item[\kt{Tuple}] --- type for conjunctions
+            \item[\kt{Clause}] --- type for clauses
+        \end{description}
+
+        \framebreak
+
+        \item All sub-types of \kt{Term}:
+        %
+        \begin{itemize}
+            \item are strictly \alert{immutable} (i.e. one cannot alter a term/clause)
+            \item come with a number of \alert{static factory} methods letting the user instantiate them
+            %
+            \begin{itemize}
+                \item most commonly \kt{<Type>.\alert{of}(<args>)}
+                \item they won't let you instantiate invalid terms or clauses :)
+                \item they guarantee the term to be of the \alert{most adequate} sub-type
+            \end{itemize}
+        \end{itemize}
+
+        \bigskip
+
+        \item In the following exercises you will mostly need to create terms
+        %
+        \begin{itemize}
+            \item use the map on figure \ref{fig:term-hierarchy} to know \alert{which} types exist
+            \item have a look to \cite{Ciatto20212pktPresentation} for detailed API description
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\subsection{Exercises}
+
+\subsubsection{Exercises on terms}
+
+\begin{frame}{About Exercises}
+
+    \begin{block}{Repository}
+        \centering
+        \url{https://gitlab.com/pika-lab/courses/ise/ay2122/lab-1}
+    \end{block}
+    
+\end{frame}
+
+\startExercise{}
+
+\begin{frame}{\currentExercise{} -- Terms construction}
+    \label{slide:first-exercise-on-terms}
+
+    \begin{block}{Goal}
+        Understand the basics of terms construction in \twopkt{}
+    \end{block}
+    
+\end{frame}
+
+\startExercise{}
+
+\begin{frame}{\currentExercise{} -- Herbrand Universe}
+    \label{slide:second-exercise-on-terms}
+
+    \begin{block}{Goal}
+        \begin{itemize}
+            \item Implement the algorithm for constructing the Herbrand Universe \ldots
+            %
+            \begin{itemize}
+                \item \ldots spawned by a set of functors and their arities (provided as arguments)
+            \end{itemize}
+
+            \item Use the algorithm from slide \ref{slide:herbrand} as a reference
+            
+            \item Since $\mathcal{H}_\infty$ may be of infinite cardinality\ldots
+            %
+            \begin{itemize}
+                \item \ldots you'll actually implement the algorithm for computing $\mathcal{H}_i$
+                %
+                \begin{itemize}
+                    \item where $i$ is provided as argument
+                \end{itemize}
+            \end{itemize}
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\subsubsection{Exercises on Horn clauses}
+
+\startExercise{}
+
+\begin{frame}{\currentExercise{} -- Clauses construction}
+    \label{slide:first-exercise-on-clauses}
+    \begin{block}{Goal}
+        Understand the basics of clauses and theories construction in \twopkt{}
+    \end{block}
+    
+\end{frame}
+
+\startExercise{}
+
+\begin{frame}{\currentExercise{} -- Theory Analysis}
+    \label{slide:second-exercise-on-clauses}
+    \begin{block}{Goal}
+        \begin{itemize}
+            \item Write an algorithm aimed at inspecting a theory, in order to compute:
+            %
+            \begin{itemize}
+                \item the set $\mathcal{P}$ of predicate names (predications)
+                \item the set $\mathcal{F}$ of function names (functors)
+                \item the set $\mathcal{X}$ of variables names 
+            \end{itemize}
+            \item It should work \alert{for any given theory}
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\subsubsection{Exercises on representations}
+
+\startExercise{}
+
+\begin{frame}{\currentExercise{} -- Relationalization}
+    \begin{block}{Goal}
+        \begin{itemize}
+            \item Write an algorithm aimed at relationalising a theory in propositional form
+            
+            \item It should work \alert{for any given theory}
+            
+            \item The algorithm may accept as input:
+            %
+            \begin{itemize}
+                \item a theory, assumed in propositional form
+                \item the predication used to represent instances, in the propositional theory
+                \item the names of the attributes (which may be implicit in the propositional theory)
+            \end{itemize}
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\subsubsection{Exercises on substitutions and unification}
 
 \begin{frame}[allowframebreaks]{All exercises}
 
@@ -2484,34 +2482,36 @@ Topics necessary to understand two or more mechanisms:
             \item[\currentExercise] is about theories and their exploitation for clause retrieval via unification
         \end{description}
     \end{block}
-    %
-    \begin{block}{Exercises about \textbf{resolution}}
-        \label{slide:ex-res}
-        \begin{description}
-            \startExercise
-            \item[\currentExercise] is about depth-first resolution strategies
-            %
-            \begin{itemize}
-                \item here you should implement a depth-first, Prolog-like solver (supporting no side-effects)
-            \end{itemize} 
+\end{frame}
 
-            \startExercise
-            \item[\currentExercise] is about smarter resolution strategies
+\subsubsection{Exercises resolution}
+
+\begin{frame}[allowframebreaks]{Exercises about \textbf{resolution}}
+    \label{slide:ex-res}
+    \begin{description}
+        \startExercise
+        \item[\currentExercise] is about depth-first resolution strategies
+        %
+        \begin{itemize}
+            \item here you should implement a depth-first, Prolog-like solver (supporting no side-effects)
+        \end{itemize} 
+
+        \startExercise
+        \item[\currentExercise] is about smarter resolution strategies
+        %
+        \begin{itemize}
+            \item here you should implement a Prolog-like solver (supporting no side-effects) \ldots
+            \item \ldots which avoids getting stuck in simple recursive definitions such as:
             %
-            \begin{itemize}
-                \item here you should implement a Prolog-like solver (supporting no side-effects) \ldots
-                \item \ldots which avoids getting stuck in simple recursive definitions such as:
-                %
-                \begin{center}
-                    $\begin{array}{l}
-                        \predication{nat}(\functor{s}(X)) \Leftarrow \predication{nat}(X) \fullstop
-                        \\
-                        \predication{nat}(\functor{z}) \fullstop
-                    \end{array}$
-                \end{center}
-            \end{itemize} 
-        \end{description}
-    \end{block}
+            \begin{center}
+                $\begin{array}{l}
+                    \predication{nat}(\functor{s}(X)) \Leftarrow \predication{nat}(X) \fullstop
+                    \\
+                    \predication{nat}(\functor{z}) \fullstop
+                \end{array}$
+            \end{center}
+        \end{itemize} 
+    \end{description}
 \end{frame}
 
 %===============================================================================
