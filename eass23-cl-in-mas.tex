@@ -52,7 +52,227 @@
 %/////////
 
 %===============================================================================
-\section{Premises}
+\section{Why CL for MAS?}
+%===============================================================================
+
+%/////////
+\begin{frame}[c]{Agent}
+%
+\begin{block}{Insight}
+    Any entity capable of \alert{acting}\footnote{``acting'' = ``affecting the environment, and (possibly) the agents therein contained''}
+    to reach some \alert{goals}
+    %
+    \begin{itemize}
+        \item while being situated into some \alert{environment}
+        %
+        \begin{itemize}
+            \item which can be both \alert{perceived} and \alert{affected}
+        \end{itemize}
+
+        \item possibly, along with other agents
+        %
+        \begin{itemize}
+            \item with which \alert{interaction} is possible
+        \end{itemize}
+    \end{itemize}
+\end{block}
+%
+\begin{exampleblock}{Examples of agents}
+    \begin{multicols}{2}
+        \begin{itemize}
+            \item human beings
+            \item OS processes
+            \item OS threads
+            \item logic solvers
+            \item robots
+            \item BDI agents
+        \end{itemize}
+    \end{multicols}
+\end{exampleblock}
+%
+\end{frame}
+%/////////
+
+%/////////
+\begin{frame}[c,allowframebreaks]{Intelligence (of Agents)}
+%
+\begin{block}{Insight}
+    Agents are \alert{intelligent} when they have \alert{cognitive capabilities}, and they know when/how to use them to pursue their goal(s)
+\end{block}
+%
+\begin{exampleblock}{Examples of \textbf{cognitive capabilities}}\small
+    \begin{itemize}
+        \item \alert{perceiving} stimuli and \alert{recognise} abstractions on top of them
+        \item \alert{representing knowledge} (e.g. perceptions, abstractions, goals, actions, etc) and \alert{memorising} it for later re-use
+        \item \alert{learning} from the experience (i.e. generalise the gathered knowledge)
+        \item \alert{planning} courses of action to pursue goals
+        \item \alert{reasoning} about knowledge (to \emph{deduce} implicit knowledge, to \emph{induce} new knowledge, to \emph{abduce} hypotheses)
+        \item \alert{interact} with other agents to exchange information (goals, knowledge, plans)
+        \item etc.
+    \end{itemize}
+\end{exampleblock}
+%
+\begin{exampleblock}{Examples of intelligent agents}
+    \begin{itemize}
+        \item human agents behave intelligently (most of the times)
+        \item software agents require cognitive capabilities, to behave intelligently
+        %
+        \begin{itemize}
+            \item plus some criterion to decide when and how to use them
+        \end{itemize}
+    \end{itemize}
+\end{exampleblock}
+%
+\framebreak
+%
+\begin{alertblock}{Cognitive capabilities $\nRightarrow$ Intelligence}
+    Cognitive behaviours may or may not be considered as intelligent depending on the \alert{context} they are applied into, and on the \alert{observer}
+\end{alertblock}
+%
+\begin{exampleblock}{Examples of intelligent agents}
+    \begin{itemize}
+        \item agent stepping through the window at ground floor
+        \item agent stepping through the window at $N^{th}$ floor
+    \end{itemize}
+\end{exampleblock}
+%
+\end{frame}
+%/////////
+
+%/////////
+\begin{frame}[c,allowframebreaks]{Fundamental Mechanisms of Intelligent Systems}
+%
+\begin{enumerate}
+    \item Knowledge representation
+    %
+    \begin{itemize}
+        \item How is information represented to favour memorisation and processing
+    \end{itemize}
+    %
+    \item Inference
+    %
+    \begin{itemize}
+        \item How novel/explicit knowledge is attained from prior/implicit knowledge
+    \end{itemize}
+    %
+    \item Perception / actuation
+    %
+    \begin{itemize}
+        \item How information exchange with the environment occurs
+    \end{itemize}
+    %
+    \item Planning
+    %
+    \begin{itemize}
+        \item How courses of actions (directed towards some goal) are computed
+    \end{itemize}
+    %
+    \item Learning
+    %
+    \begin{itemize}
+        \item How experience is transformed into knowledge
+    \end{itemize}
+    %
+    \item Deliberation
+    %
+    \begin{itemize}
+        \item Where all such aspects are tied together
+    \end{itemize}
+    %
+    \item Environment and artefacts
+    %
+    \begin{itemize}
+        \item Where (inter)actions are coordinated
+    \end{itemize}
+    %
+\end{enumerate}
+%
+\framebreak
+%
+\begin{block}{Special guest: \textbf{Explanation}}
+    How knowledge is \alert{transferred} from an agent to another
+    %
+    \begin{itemize}
+        \item software to human agent $\leftarrow$ symbolic knowledge \alert{extraction}
+        \item human to software agent $\leftarrow$ symbolic knowledge \alert{injection}
+    \end{itemize}
+\end{block}
+%
+\begin{block}{Special guest: \textbf{Argumentation}}
+    Letting agents reach shared agreements by \alert{arguing}
+    %
+    \begin{itemize}
+        \item reason about how arguments attack each other
+        \item reason about when to present an argument to the opponent(s)
+    \end{itemize}
+\end{block}
+%
+\end{frame}
+%/////////
+
+%/////////
+\begin{frame}[c,allowframebreaks]{Orthogonal topics}
+
+Topics necessary to understand two or more mechanisms:
+
+\begin{block}{Data science (a.k.a. machine learning, a.k.a. data mining)}
+    The use of statistics and algorithms to extract knowledge out of data
+    %
+    \begin{itemize}
+        \item necessary or useful for:
+        \vspace{-10pt}
+        \begin{multicols}{2}
+            \begin{itemize}
+                \item perception
+                \item learning
+                \item inference
+                \item processing
+            \end{itemize}
+        \end{multicols}
+    \end{itemize}
+\end{block}
+%
+\begin{itemize}
+    \item we assume students already have a background on this topic
+    %
+    \begin{itemize}
+        \item yet, most relevant aspects may be recalled when needed
+    \end{itemize}
+\end{itemize}
+
+\begin{block}{Computational Logic}
+    The use of logic to \emph{perform} or \emph{reason about} computation
+    %
+    \begin{itemize}
+        \item necessary or useful for:
+        \vspace{-10pt}
+        \begin{multicols}{2}
+            \begin{itemize}
+                \item knowledge representation
+                \item reasoning
+                \item planning
+                \item learning
+                \item perception
+                \item deliberation
+            \end{itemize}
+        \end{multicols}
+    \end{itemize}
+\end{block}
+%
+\begin{itemize}
+    \item we provide background on this topic, along the course
+\end{itemize}
+
+\end{frame}
+%/////////
+
+%===============================================================================
+\section{Knowledge Representation}
+%===============================================================================
+
+
+%===============================================================================
+\subsection{Premises}
 %===============================================================================
 
 \begin{frame}{Lecture Goals}
@@ -198,7 +418,7 @@
 \end{frame}
 
 %===============================================================================
-\section{Knowledge Representation}
+\subsection{Main notions}
 %===============================================================================
 
 \begin{frame}{Overview}
@@ -239,7 +459,7 @@
     \end{itemize}
 \end{frame}
 
-\subsection{Terms}
+\subsubsection{Terms}
 
 \begin{frame}[allowframebreaks]{Terms}
     \begin{block}{Purpose}\centering
@@ -354,7 +574,7 @@
     \end{alertblock}
 \end{frame}
 
-\subsubsection{Ancillary definitions}
+% \subsubsubsection{Ancillary definitions}
 
 \begin{frame}[allowframebreaks]{Groundness}
     \begin{block}{Informal definition}\centering
@@ -450,7 +670,7 @@
     \end{block}
 \end{frame}
 
-\subsection{Predicates}
+\subsubsection{Predicates}
 
 \begin{frame}[allowframebreaks]{Predicates}
     \begin{block}{Purpose}\centering
@@ -600,7 +820,7 @@
     \end{description}
 \end{frame}
 
-\subsection{Horn Clauses}
+\subsubsection{Horn Clauses}
 
 \begin{frame}[allowframebreaks]{Horn Clauses}
     \begin{block}{Purpose}\centering
@@ -790,7 +1010,7 @@
 \end{frame}
 
 %===============================================================================
-\section{Flexibility of Logic Representation}
+\subsection{Flexibility of Logic Representation}
 %===============================================================================
 
 \begin{frame}{Overview}
@@ -831,7 +1051,7 @@
     \end{itemize}
 \end{frame}
 
-\subsection{Intensional vs. Extensional}
+\subsubsection{Intensional vs. Extensional}
 
 \begin{frame}[allowframebreaks]{Intensional vs. Extensional Representations}
     \begin{block}{``Intension and extension'' \uuurl{https://www.britannica.com/topic/intension}}\itshape\small
@@ -930,7 +1150,7 @@
     \end{alertblock}
 \end{frame}
 
-\subsection{Relational vs. Propositional}
+\subsubsection{Relational vs. Propositional}
 
 \begin{frame}[allowframebreaks]{Relational vs. Propositional Representations}
 
@@ -1062,7 +1282,7 @@
 \end{frame}
 
 %===============================================================================
-\section{About Horn Clauses in Prolog}
+\subsection{About Horn Clauses in Prolog}
 %===============================================================================
 
 \begin{frame}{Prolog Overview}
@@ -1099,7 +1319,7 @@
     \end{itemize}
 \end{frame}
 
-\subsection{Why Prolog is tricky}
+\subsubsection{Why Prolog is tricky}
 
 \begin{frame}[allowframebreaks]{Horn Clauses in Prolog}
     \begin{block}{The Prolog trick}
@@ -1148,7 +1368,7 @@
 \end{frame}
 
 %===============================================================================
-\section{Practice}
+\subsection{Practice}
 %===============================================================================
 
 \subsection{\tuprolog{} and \twopkt{}}
@@ -1240,7 +1460,7 @@
     \end{itemize}
 \end{frame}
 
-\subsection{Exercises on terms}
+\subsubsection{Exercises on terms}
 
 \begin{frame}{About Exercises}
 
@@ -1290,7 +1510,7 @@
     \end{block}
 \end{frame}
 
-\subsection{Exercises on Horn clauses}
+\subsubsection{Exercises on Horn clauses}
 
 \startExercise{}
 
@@ -1320,7 +1540,7 @@
     \end{block}
 \end{frame}
 
-\subsection{Exercises on representations}
+\subsubsection{Exercises on representations}
 
 \startExercise{}
 
