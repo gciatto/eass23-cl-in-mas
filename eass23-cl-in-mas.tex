@@ -13,7 +13,7 @@
 \usepackage{eass23-cl-in-mas}
 % version
 \newcommand{\versionmajor}{1}
-\newcommand{\versionminor}{0}
+\newcommand{\versionminor}{1}
 \newcommand{\versionpatch}{0}
 \newcommand{\version}{\versionmajor.\versionminor.\versionpatch}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2354,31 +2354,48 @@ Topics necessary to understand two or more mechanisms:
 
 \subsection{Exercises}
 
-\subsubsection{Exercises on terms}
+\subsubsection{Preliminaries}
 
 \begin{frame}{About Exercises}
 
     \begin{block}{Repository}
         \centering
-        \url{https://gitlab.com/pika-lab/courses/ise/ay2122/lab-1}
+        \url{https://github.com/gciatto/eass23-cl-in-mas-exercises}
     \end{block}
+    %
+    \begin{enumerate}
+        \item Clone the repository locally
+        \item Open the project in IntelliJ IDEA (or any other IDE you like)
+        %
+        \begin{itemize}
+            \item if the IDE supports that, import the project as a Gradle project
+        \end{itemize}
+        \item If working from the command line (or from lightweight IDEs like VSCode):
+        %
+        \begin{itemize}
+            \item run \alert{\texttt{./gradlew build}} to restore dependencies
+            \item this may take a while the first time
+            \item it's normal if the build fails on the first run
+        \end{itemize}
+    \end{enumerate}
     
 \end{frame}
 
-\startExercise{}
+\subsubsection{Exercises on terms}
 
+\startExercise{}
 \begin{frame}{\currentExercise{} -- Terms construction}
     \label{slide:first-exercise-on-terms}
 
     \begin{block}{Goal}
-        Understand the basics of terms construction in \twopkt{}
+        Practice with the creation and usage of terms in \twopkt{}
     \end{block}
     
 \end{frame}
 
 \startExercise{}
 
-\begin{frame}{\currentExercise{} -- Herbrand Universe}
+\begin{frame}{\currentExercise{} -- Herbrand Universe \hfill (advanced, \alert{optional})}
     \label{slide:second-exercise-on-terms}
 
     \begin{block}{Goal}
@@ -2413,12 +2430,11 @@ Topics necessary to understand two or more mechanisms:
     \begin{block}{Goal}
         Understand the basics of clauses and theories construction in \twopkt{}
     \end{block}
-    
 \end{frame}
 
 \startExercise{}
 
-\begin{frame}{\currentExercise{} -- Theory Analysis}
+\begin{frame}{\currentExercise{} -- Theory analysis \hfill (advanced, \alert{optional})}
     \label{slide:second-exercise-on-clauses}
     \begin{block}{Goal}
         \begin{itemize}
@@ -2434,11 +2450,62 @@ Topics necessary to understand two or more mechanisms:
     \end{block}
 \end{frame}
 
-\subsubsection{Exercises on representations}
+\subsubsection{Exercises substitutions}
 
 \startExercise{}
 
-\begin{frame}{\currentExercise{} -- Relationalization}
+\begin{frame}{\currentExercise{} -- Substitutions}
+    \label{slide:ex-sub}
+
+    \begin{block}{Goal}
+        Practice with the creation and usage of substitutions in \twopkt{}
+    \end{block}
+    %
+    \begin{alertblock}{Recommended order of exercises}
+        \begin{enumerate}
+            \item \texttt{SubstitutionApplication.kt} is about substitutions and their application
+            \begin{itemize}
+                \item you should construct the expected term attained by applying a substitution to another term
+                \begin{itemize}
+                    \item hence, understanding the effect of substitution application
+                \end{itemize}
+            \end{itemize}
+
+            \item \texttt{ClauseRefreshing.kt} is about clauses and their refreshing
+            \begin{itemize}
+                \item you should refresh some clauses and the variables therein contained
+            \end{itemize}
+
+            \item \texttt{SubstitutionMerging.kt} is about substitutions and their merging
+            \begin{itemize}
+                \item you should construct the expected substitution attained by merging two substitutions
+            \end{itemize}
+        \end{enumerate}
+    \end{alertblock}
+\end{frame}
+
+\subsubsection{Exercises on unification}
+
+\startExercise{}
+
+\begin{frame}{\currentExercise{} -- Unification}
+    \label{slide:ex-uni}
+    \begin{block}{Goal}
+        Practice with the exploitation of unification in \twopkt{}
+    \end{block}
+\end{frame}
+
+\startExercise{}
+
+\begin{frame}{\currentExercise{} -- Clauses retrieval from theories}
+    \begin{block}{Goal}
+        Practice with the exploitation of unification as a means to query theories
+    \end{block}
+\end{frame}
+
+\startExercise{}
+
+\begin{frame}{\currentExercise{} -- Relationalization \hfill (advanced, \alert{optional})}
     \begin{block}{Goal}
         \begin{itemize}
             \item Write an algorithm aimed at relationalising a theory in propositional form
@@ -2456,56 +2523,17 @@ Topics necessary to understand two or more mechanisms:
     \end{block}
 \end{frame}
 
-\subsubsection{Exercises on substitutions and unification}
+\subsubsection{Exercises on resolution}
 
-\begin{frame}[allowframebreaks]{All exercises}
+\startExercise{}
 
-    \begin{alertblock}{Repository}
-        \centering
-        \url{https://gitlab.com/pika-lab/courses/ise/ay2122/lab-2}
-    \end{alertblock}
-
-    \begin{block}{Exercises about \textbf{substitutions}}
-        \label{slide:ex-sub}
-        \begin{description}
-            \startExercise
-            \item[\currentExercise] is about substitutions and their application 
-            \startExercise
-            \item[\currentExercise] is about clauses and their refreshing
-            \startExercise
-            \item[\currentExercise] is about substitutions and their merging
-        \end{description}
-    \end{block}
-    %
-    \begin{block}{Exercises about \textbf{unification}}
-        \label{slide:ex-uni}
-        \begin{description}
-            \startExercise
-            \item[\currentExercise] is about MGU and its computation
-            \startExercise
-            \item[\currentExercise] is about theories and their exploitation for clause retrieval via unification
-        \end{description}
-    \end{block}
-\end{frame}
-
-\subsubsection{Exercises resolution}
-
-\begin{frame}[allowframebreaks]{Exercises about \textbf{resolution}}
+\begin{frame}{\currentExercise{} -- Pure logic solvers \hfill (advanced)}
     \label{slide:ex-res}
-    \begin{description}
-        \startExercise
-        \item[\currentExercise] is about depth-first resolution strategies
-        %
-        \begin{itemize}
-            \item here you should implement a depth-first, Prolog-like solver (supporting no side-effects)
-        \end{itemize} 
 
-        \startExercise
-        \item[\currentExercise] is about smarter resolution strategies
-        %
-        \begin{itemize}
-            \item here you should implement a Prolog-like solver (supporting no side-effects) \ldots
-            \item \ldots which avoids getting stuck in simple recursive definitions such as:
+    \begin{block}{Goals}
+        \begin{enumerate}
+            \item Implement a pure (no side effects) depth-first, logic solver 
+            \item Create a smart variant of that solver, which avoids getting stuck in simple recursive definitions such as: 
             %
             \begin{center}
                 $\begin{array}{l}
@@ -2514,8 +2542,23 @@ Topics necessary to understand two or more mechanisms:
                     \predication{nat}(\functor{z}) \fullstop
                 \end{array}$
             \end{center}
-        \end{itemize} 
-    \end{description}
+        \end{enumerate}
+    \end{block}
+\end{frame}
+
+\startExercise{}
+
+\begin{frame}{\currentExercise{} -- Logic solvers and side-effects \hfill (advanced, \alert{optional})}
+    
+    \begin{block}{Goal}
+        Extend the logic solver from previous exercise to support Prolog-like meta predicates such as:
+        \begin{description}\small
+            \item[\pl{not(P)}] which fails if predicate \pl{P} is true
+            \item[\pl{assert(C)}] which adds clause \pl{C} to the solver's knowledge base
+            \item[\pl{retract(C)}] which removes clause \pl{C} from the solver's knowledge base
+            \item[\pl{is(X, E)}] which assigns to variable \pl{X} the value attained by evaluating expression \pl{E}
+        \end{description}
+    \end{block}
 \end{frame}
 
 %===============================================================================
