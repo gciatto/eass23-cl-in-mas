@@ -1,4 +1,4 @@
-# On the role of computational logic in MAS: practice with 2P-Kt 4 hours
+# On the role of computational logic in MAS: practice with 2P-Kt
 
 4h lecture at EASS 2023, held by [Giovanni Ciatto](mailto:giovanni.ciatto@unibo.it)
 
